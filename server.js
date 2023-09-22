@@ -30,7 +30,7 @@ async function createServer() {
     try {
       if (isDev) {
         template = fs.readFileSync(
-          path.resolve(__dirname, "index.html"),
+          path.resolve(__dirname, "start-page.html"),
           "utf-8"
         );
 

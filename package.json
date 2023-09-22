@@ -4,15 +4,17 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "NODE_ENV=development node server.js",
-    "build": "npm run build:client && npm run build:server",
-    "build:client": "vite build --outDir dist/client --ssrManifest",
-    "build:server": "vite build --outDir dist/server --ssr src/entry-server.tsx ",
-    "serve": "NODE_ENV=production node server.js"
+    "build:client-dev": "cross-env BUILD_TYPE=development NODE_ENV=production vite build --outDir dist/client --ssrManifest",
+    "build:server-dev": "cross-env BUILD_TYPE=development NODE_ENV=production vite build --outDir dist/server --ssr src/entry-server.tsx ",
+    "build:client-prod": "cross-env BUILD_TYPE=production NODE_ENV=production vite build --outDir dist/client --ssrManifest",
+    "build:server-prod": "cross-env BUILD_TYPE=production NODE_ENV=production vite build --outDir dist/server --ssr src/entry-server.tsx ",
+    "build-dev": "npm run build:client-dev && npm run build:server-dev",
+    "build-prod": "npm run build:client-prod && npm run build:server-prod",
+    "dev": "BUILD_TYPE=local NODE_ENV=development node server.js",
+    "serve-prod": "BUILD_TYPE=production NODE_ENV=production node server.js",
+    "serve-dev": "BUILD_TYPE=development NODE_ENV=production node server.js"
   },
   "dependencies": {
-    "cross-env": "^7.0.3",
-    "express": "^4.18.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.16.0"
@@ -23,12 +25,15 @@
     "@typescript-eslint/eslint-plugin": "^6.0.0",
     "@typescript-eslint/parser": "^6.0.0",
     "@vitejs/plugin-react": "^4.0.3",
+    "autoprefixer": "^10.4.16",
     "eslint": "^8.45.0",
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.3",
     "prettier": "2.6.0",
     "sass": "^1.68.0",
     "typescript": "^5.0.2",
-    "vite": "^4.4.5"
+    "vite": "^4.4.5",
+    "cross-env": "^7.0.3",
+    "express": "^4.18.2"
   }
 }

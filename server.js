@@ -7,7 +7,7 @@ import { createServer as createViteServer } from "vite";
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const PORT = 5173;
 
-const isDev = process.env.NODE_ENV === "development";
+const isDev = process.env.BUILD_TYPE !== "production";
 
 async function createServer() {
   const app = express();
@@ -25,7 +25,7 @@ async function createServer() {
 
   app.use("*", async (req, res, next) => {
     const url = req.originalUrl;
-    let template, render;
+    let render, template;
 
     try {
       if (isDev) {
